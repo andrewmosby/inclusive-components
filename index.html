@@ -1,14 +1,50 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="en-us">
 <head>
-<title>Inclusive Components</title>
+  <title>
+    Inclusive Components
+  </title>
 </head>
 <body>
-    <h1>Inclusive Components examples</h1>
-    <h2>Toggle Buttons</h2>
-    <ul>
-        <li><a href="/toggle-buttons/form-elements.html">Form Elements</a></li>
-        <li><a href="/toggle-buttons/buttons.html">Buttons</a></li>
-    </ul>
+  <h1>
+    Inclusive Components examples
+  </h1>
+  <h2>
+    Toggle Buttons
+  </h2>
+  <ul>
+    <li>
+      <a href="/toggle-buttons/form-elements.html">
+        Form Elements
+      </a>
+    </li>
+    <li>
+      <a href="/toggle-buttons/buttons.html">
+        Buttons
+      </a>
+    </li>
+    <li>
+      <a href="/toggle-buttons/switch-controls.html">
+        Switch controls
+      </a>
+    </li>
+  </ul>
+  <h3>
+    Chapter notes
+  </h3>
+  <ul>
+    <li>
+      Use form elements such as checkboxes for on/off toggles if you are certain the user won&rsquo;t believe they are for submitting data.
+    </li>
+    <li>
+      Use `button` elements, not links, with `aria-pressed` or `aria-checked`.
+    </li>
+    <li>
+      Don&rsquo;t change label and state together.
+    </li>
+    <li>
+      When using visual &ldquo;on&rdquo; and &ldquo;off&rdquo; text labels (or similar) you can override these with a unique label via `aria-labelledby`.
+    </li>
+  </ul>
 </body>
 </html>

@@ -4,8 +4,13 @@
   <title>
     Checkboxes and Radio Buttons
   </title>
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
+  <a href="../index.html">Home</a>
+  <h1>
+    Checkboxes and radio buttons
+  </h1>
   <div class="example">
     <input type="checkbox" id="notify" name="notify" value="on">
     <label for="notify">
@@ -26,6 +31,9 @@
         off
       </label>
     </fieldset>
+    <blockquote>
+      Group labels are a powerful tool. As their name suggests, they can provide a single label to related (grouped) items. In this case, the `fieldset` group element works together with the `legend` element to provide the group label “Notify by email” to the pair of radio buttons. These buttons are made a pair by sharing a `name` attribute value, which makes it possible to toggle between them using your arrow keys.
+    </blockquote>
   </div>
 </body>
 </html>

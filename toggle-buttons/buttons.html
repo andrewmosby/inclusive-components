@@ -5,6 +5,7 @@
   <title>
     Checkboxes and Radio Buttons
   </title>
+  <link rel="stylesheet" href="./style.css">
   <style>
     button {
       color: white;
@@ -30,30 +31,11 @@
         content: '\0020√'
       }
     }
-
-    .visually-hidden {
-      position: absolute !important;
-      clip: rect(1px, 1px, 1px, 1px) !important;
-      padding: 0 !important;
-      border: 0 !important;
-      height: 1px !important;
-      width: 1px !important;
-      overflow: hidden !important;
-    }
-
-    .example {
-      padding: 20px;
-    }
-
-    blockquote {
-      margin-left: 0;
-      padding-left: 32px;
-      border-left: 3px solid black;
-    }
   </style>
 </head>
 
 <body>
+  <a href="../index.html">Home</a>
   <h1>
     Toggle button with [aria-pressed]
   </h1>
@@ -65,6 +47,7 @@
   <div class="example">
     <blockquote>
       Note the translation issues with `aria-label` meaning that, for an international audience&mdash;which is always the audience of the web&mdash;using a visually hidden `span` is preferable. Text nodes are reliably translated by Google&rsquo;s and Microsoft&rsquo;s translation services. <br>
+      <br>
       Where this is implemented, you have to manually hide the unicode points, using `aria-hidden="true"`.
     </blockquote>
     <!-- Paused state -->

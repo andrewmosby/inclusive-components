@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <title>
+    Switches with aria-labelledby
+  </title>
+  <link rel="stylesheet" href="./style.css">
+  <style>
+    li {
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      align-items: center;
+    }
+
+    li+li {
+      border-top: 2px solid;
+    }
+
+    button {
+      padding: 0.25rem 0.5rem;
+      border: 0.25rem solid;
+      border-radius: 0.25rem;
+      font-size: inherit;
+    }
+
+    button:focus {
+      outline: none;
+      box-shadow: 0 0 0 0.25rem skyBlue;
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+      /* ↑ for Windows High Constrast Mode users */
+    }
+
+    [aria-checked] span {
+      font-size: 0.75rem;
+      font-weight: bold;
+      display: inline-block;
+      border-radius: 0.25rem;
+      padding: 0.25rem;
+    }
+
+    [aria-checked="true"] :first-child,
+    [aria-checked="false"] :last-child {
+      background-color: #000;
+      border: 2px solid transparent;
+      /* ↑ for Windows High Constrast Mode users */
+      color: #fff;
+    }
+  </style>
+</head>
+
+<body>
+  <a href="../index.html">Home</a>
+  <h1>Switch controls, with auxiliary labeling using
+    <code>aria-labelledby</code>
+  </h1>
+  <blockquote>
+    The virtue of lists is that, both visually and non-visually, they group items together, showing they are related. Not only does this help comprehension, but lists also provide navigational shortcuts in some screen readers. For example, JAWS provides the [L] (list) and [I] (list item) quick keys for moving between and through lists.
+  </blockquote>
+  <blockquote>
+    Importantly, the ARIA label overrides each button&rsquo;s textual content, meaning we can once again employ `aria-pressed` to communicate state. However, since these buttons are explicitly &ldquo;on/off&rdquo; switches, we can instead use the WAI-ARIA switch role, which communicates state via `aria-checked`.
+  </blockquote>
+  <ul>
+    <li>
+      <span id="notify-email">Notify by email</span>
+      <button role="switch" aria-checked="true" aria-labelledby="notify-email">
+        <span>on</span>
+        <span>off</span>
+      </button>
+    </li>
+    <li>
+      <span id="notify-sms">Notify by SMS</span>
+      <button role="switch" aria-checked="true" aria-labelledby="notify-sms">
+        <span>on</span>
+        <span>off</span>
+      </button>
+    </li>
+    <li>
+      <span id="notify-fax">Notify by fax</span>
+      <button role="switch" aria-checked="false" aria-labelledby="notify-fax">
+        <span>on</span>
+        <span>off</span>
+      </button>
+    </li>
+    <li>
+      <span id="notify-smoke">Notify by smoke signal</span>
+      <button role="switch" aria-checked="false" aria-labelledby="notify-smoke">
+        <span>on</span>
+        <span>off</span>
+      </button>
+    </li>
+  </ul>
+  <script>
+    const toggles = document.querySelectorAll('[role="switch"]');
+
+    toggles.forEach(toggle => {
+      toggle.addEventListener('click', e => {
+        let checked = toggle.getAttribute('aria-checked') === 'true';
+        toggle.setAttribute('aria-checked', !checked);
+      });
+    });
+  </script>
+</body>
+</html>
