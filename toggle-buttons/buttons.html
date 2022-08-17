@@ -1,28 +1,92 @@
 <!DOCTYPE html>
-<html lang="">
-<head>
-<title>Checkboxes and Radio Buttons</title>
-<style>
-    [aria-pressed="true"] {
-        background: black;
-        color: white;
-    }
-</style>
-</head>
-<body>
-    <h1>Toggle button with [aria-pressed]</h1>
-    <div class="example">
-        <button type="button" aria-pressed="true">
-            Notify by email
-        </button>
-    </div>
-    <script>
-        const toggle = document.querySelector('[aria-pressed]');
+<html lang="en-us">
 
-        toggle.addEventListener('click', e => {
-            let pressed = e.target.getAttribute('aria-pressed') === 'true';
-            e.target.setAttribute('aria-pressed', !pressed);
-        });
-    </script>
+<head>
+  <title>
+    Checkboxes and Radio Buttons
+  </title>
+  <style>
+    button {
+      color: white;
+      background-color: black;
+      border-radius: 4px;
+      padding: 16px 24px;
+    }
+
+    [aria-pressed] {
+      position: relative;
+      top: -4px;
+      left: -4px;
+      box-shadow: 2px 2px 0 white, 4px 4px black;
+    }
+
+    [aria-pressed="true"] {
+      box-shadow: inset 0 0 0 2px black, inset 4px 4px 0 white;
+    }
+
+    /* `box-shadow` is removed in Windows High Contrast themes */
+    @media (-ms-high-contrast: active) {
+      [aria-pressed="true"]::after {
+        content: '\0020√'
+      }
+    }
+
+    .visually-hidden {
+      position: absolute !important;
+      clip: rect(1px, 1px, 1px, 1px) !important;
+      padding: 0 !important;
+      border: 0 !important;
+      height: 1px !important;
+      width: 1px !important;
+      overflow: hidden !important;
+    }
+
+    .example {
+      padding: 20px;
+    }
+
+    blockquote {
+      margin-left: 0;
+      padding-left: 32px;
+      border-left: 3px solid black;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>
+    Toggle button with [aria-pressed]
+  </h1>
+  <div class="example">
+    <button type="button" aria-pressed="false">
+      Notify by email
+    </button>
+  </div>
+  <div class="example">
+    <blockquote>
+      Note the translation issues with `aria-label` meaning that, for an international audience&mdash;which is always the audience of the web&mdash;using a visually hidden `span` is preferable. Text nodes are reliably translated by Google&rsquo;s and Microsoft&rsquo;s translation services. <br>
+      Where this is implemented, you have to manually hide the unicode points, using `aria-hidden="true"`.
+    </blockquote>
+    <!-- Paused state -->
+    <button type="button" aria-pressed="false">
+      <span aria-hidden="true">
+        &#x25b6;
+      </span>
+      <span class="visually-hidden">
+        Play
+      </span>
+    </button>
+  </div>
+  <script>
+    const toggle = document.querySelectorAll('[aria-pressed]');
+
+    toggle.forEach(element => {
+      element.addEventListener('click', e => {
+        let pressed = e.target.getAttribute('aria-pressed') === 'true';
+        e.target.setAttribute('aria-pressed', !pressed);
+      });
+    });
+  </script>
 </body>
+
 </html>
