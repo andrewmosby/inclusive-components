@@ -1,0 +1,74 @@
+ul {
+  margin: 0 0 20px;
+  padding: 0;
+  list-style: none;
+}
+
+[type="checkbox"] {
+  margin: 0 12px 0 0;
+}
+
+/* Prevent programatically focused but non-interactive elements from appearing to have interactivity */
+[tabindex="-1"] {
+  outline: none;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+::placeholder {
+  color: #444;
+  font-style: italic;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  clip: rect(1px, 1px, 1px, 1px) !important;
+  padding: 0 !important;
+  border: 0 !important;
+  height: 1px !important;
+  width: 1px !important;
+  overflow: hidden !important;
+}
+
+blockquote {
+  margin-left: 0;
+  padding-left: 32px;
+  border-left: 3px solid black;
+}
+
+.empty-state,
+ul:empty {
+  display: none;
+}
+
+ul:empty + .empty-state {
+  display: block;
+}
+
+:checked + label {
+  text-decoration: line-through;
+  color: #aaa;
+}
+
+.todo-list__item {
+  display: flex;
+  align-items: center;
+}
+
+.delete-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+.delete-button__icon {
+  width: 24px;
+  height: 24px;
+}

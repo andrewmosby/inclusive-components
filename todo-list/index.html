@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <title>
+    Todo app
+  </title>
+  <link rel="stylesheet" href="./style.css">
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+</head>
+
+<body>
+  <svg style="display: none;">
+    <symbol id="delete-icon" viewBox="0 0 50 50">
+      <path fill="currentColor" d="m20.651 2.3339c-.73869 0-1.3312.59326-1.3312 1.3296v2.5177h-6.3634c-.73887 0-1.3314.59331-1.3314 1.3295v1.1888c0 .73639.59249 1.3289 1.3312 1.3289h7.6948 8.8798 7.6948c.73869 0 1.3312-.59249 1.3312-1.3289v-1.1888c0-.73639-.59249-1.3296-1.3312-1.3296h-6.3634v-2.5177c0-.73639-.59249-1.3296-1.3312-1.3296h-8.8798zm-5.6786 11.897c-1.7775 0-3.2704 1.4889-3.2704 3.274v27.647c0 1.7775 1.4928 3.2704 3.2704 3.2704h20.783c1.7775 0 3.2704-1.4928 3.2704-3.2704v-27.647c0-1.7852-1.4928-3.274-3.2704-3.274h-20.783zm1.839 3.4895h1.1696c.73869 0 1.3389.60018 1.3389 1.3466v24.247c0 .74638-.60018 1.3389-1.3389 1.3389h-1.1696c-.73869 0-1.3389-.59249-1.3389-1.3389v-24.247c0-.74638.60018-1.3466 1.3389-1.3466zm7.6948 0h1.1696c.73869 0 1.3389.60018 1.3389 1.3466v24.247c0 .74638-.60018 1.3389-1.3389 1.3389h-1.1696c-.73869 0-1.3389-.59249-1.3389-1.3389v-24.247c0-.74638.60018-1.3466 1.3389-1.3466zm7.6948 0h1.1696c.73869 0 1.3389.60018 1.3389 1.3466v24.247c0 .74638-.60018 1.3389-1.3389 1.3389h-1.1696c-.73869 0-1.3389-.59249-1.3389-1.3389v-24.247c0-.74638.60018-1.3466 1.3389-1.3466z"/>
+    </symbol>
+  </svg>
+  <a href="../index.html">Home</a>
+  <section id="todoApp" aria-labelledby="todos-heading">
+    <h1 id="todos-heading" tabindex="-1">
+      My Todo List
+    </h1>
+    <ul class="todo-list">
+      <li v-for="(todo, index) in todos" class="todo-list__item">
+        <input :id="`todo-${index}`" type="checkbox" v-model="todo.done">
+        <label :for="`todo-${index}`">
+          <span class="tick"></span>
+          <span>
+            {{todo.name}}
+          </span>
+        </label>
+        <button class="delete-button" @click="remove(index, todo.name)">
+          <svg focusable="false" class="delete-button__icon">
+            <use xlink:href="#delete-icon"></use>
+          </svg>
+          <span class="visually-hidden">
+            Delete {{todo.name}}
+          </span>
+        </button>
+      </li>
+    </ul>
+    <div class="empty-state">
+      <p>
+        Either you&rsquo;ve done everything already or there are still things to add to your list. Add your first todo &#x2193;
+      </p>
+    </div>
+    <form @submit="add">
+      <label for="add-todo" class="visually-hidden">
+        Add a todo item
+      </label>
+      <input id="add-todo" v-model="todoName" type="text" placeholder="E.g. Adopt an owl">
+      <button type="submit" :disabled="validity">
+        Add
+      </button>
+    </form>
+    <!-- TODO: Live Region doesn't seem to be working -->
+    <!-- begin Live Region -->
+    <div role="status" class="visually-hidden">
+      {{feedback}}
+    </div>
+    <!-- end Live Region -->
+  </section>
+  <blockquote>
+    Inclusive design has to take user lifecycles into consideration, and some of your most vulnerable users are new ones.
+  </blockquote>
+  <blockquote>
+    The real reason we need a `form` element is because we&rsquo;ll want to allow users to submit on [enter], and this only works reliably where a `form` contains the input upon which [enter] is being pressed.
+  </blockquote>
+  <blockquote>
+    Live regions are elements that tell screen readers to announce their contents whenever those contents change. With a live region, we can make screen readers talk to their users without making those users perform any action (such as moving focus).
+  </blockquote>
+  <blockquote>
+    [the strikethrough style leverages] implicit state to affect style. No need for adding and removing [a class].
+  </blockquote>
+  <blockquote>
+    <p>
+      What happens to focus when you delete the currently focused element? 1. Focus the region&rsquo;s &ldquo;My Todo List&rdquo; heading; 2. Use the live region already instated to provide some feedback.
+    </p>
+    <p>
+      In order to move a user to a heading and have it announced, you need to do two things: 1. Provide that heading with `tabindex="-1"`; 2. Focus it using the `focus()` method in your script.
+    </p>
+  </blockquote>
+  <script>
+    var app = new Vue({
+      el: '#todoApp',
+      data: {
+        todos: [],//empty array of toods
+        todoName: '',
+        feedback: ''
+      },
+      methods: {
+        add(e) {
+          e.preventDefault();
+          this.todos.push({
+            name: this.todoName,//update
+            done: false
+          });
+          this.feedback = `${this.todoName} added`;//give feedback text to live region
+          this.todoName = '';//reset todoName to ''
+        },
+        remove(index, name) {
+          this.todos.splice(index, 1);//replaces 1 element at clicked button's index
+          document.getElementById('todos-heading').focus();//move focus to top of list (heading above list)
+          this.feedback = `${name} deleted`;//give feedback text to live region
+        }
+      },
+      computed: {
+        validity() {
+          return this.todoName.trim() === '';
+        }
+      }
+    });
+  </script>
+</body>
+</html>
