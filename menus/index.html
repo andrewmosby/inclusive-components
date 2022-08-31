@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <title>
+    Navigation
+  </title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <a href="../index.html">Home</a>
+  <h1>
+    Navigation
+  </h1>
+  <nav>
+    <button aria-expanded="false" aria-controls="menu-list">
+      Navigation
+    </button>
+    <ul id="menu-list" hidden>
+      <li>
+        <a href="#">
+          Home
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          About
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          Shop
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          Contact
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <blockquote>
+    <p>
+      Where a lot of people go wrong is by placing the button outside the region. This would mean screen reader users who move to the `nav` using a shortcut would find it to be empty, which isn&rsquo;t very helpful.
+    </p>
+  </blockquote>
+  <script>
+    const navButton = document.querySelector('nav button');
+
+    navButton.addEventListener('click', function() {
+      let expanded = this.getAttribute('aria-expanded') === 'true';
+      this.setAttribute('aria-expanded', !expanded)
+
+      let menu = this.nextElementSibling;
+      menu.hidden = !menu.hidden;
+    });
+
+    //Note: We are not using an arrow function here, because we don’t want `this` to refer to the parent context.
+  </script>
+</body>
+</html>

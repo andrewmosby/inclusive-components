@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <title>
+    True Menu
+  </title>
+  <link rel="stylesheet" href="./style.css">
+  <style>
+    button {
+      padding: 0.25rem 1rem;
+      background: black;
+      color: white;
+    }
+
+    button:focus {
+      outline: none;
+      background-color: #3737c8;
+    }
+
+    [data-inclusive-menu] [role^="menuitem"] {
+      margin-top: 3px;
+    }
+    </style>
+</head>
+<body>
+  <a href="../index.html">Home</a>
+  <h1>
+    True Menu
+  </h1>
+  <div data-inclusive-menu>
+    <button data-inclusive-menu-opens="edit">
+      Edit
+      <span aria-hidden="true">&#x25be;</span>
+    </button>
+    <div id="edit" data-inclusive-menu-from="left">
+      <button>Undo</button>
+      <button>Redo</button>
+      <button>Cut</button>
+      <button>Copy</button>
+      <button>Paste</button>
+    </div>
+  </div>
+  <blockquote>
+    The `aria-haspopup` property simply indicates that, when pressed, the user will be moved to the &ldquo;popup&rdquo; menu (we&rsquo;ll cover focus behavior shortly). Its value does not change&mdash;it remains as `true` at all times.
+  </blockquote>
+  <blockquote>
+    The `aria-hidden` attribution prevents screen readers from announcing &ldquo;down pointing triangle&rdquo; or similar. Thanks to `aria-haspopup`, it&rsquo;s not needed in the non-visual context.
+  </blockquote>
+  <blockquote>
+    The property `aria-haspopup` is complemented by `aria-expanded`. This tells the user whether the menu is currently in an open (expanded) or closed (collapsed) state by toggling between `true` and `false` values.
+  </blockquote>
+  <blockquote>
+    The application of `tabindex="-1"` makes the menu items unfocusable by [TAB] but preserves the ability to focus the elements programmatically, upon capturing key strokes on the arrow keys.
+  </blockquote>
+  <script src="true-menu.js"></script>
+  <script>
+    // Instantiation
+    var exampleButton = document.querySelector('[data-inclusive-menu-opens]')
+    var exampleMenuButton = new MenuButton(exampleButton)
+
+    // Listen to choose event
+    exampleMenuButton.on('choose', function(choice) {
+      console.log('You chose "' + choice.textContent + '"')
+    })
+  </script>
+</body>
+</html>
